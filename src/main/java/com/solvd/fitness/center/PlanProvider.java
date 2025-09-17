@@ -4,6 +4,7 @@ import com.solvd.fitness.exeptions.ClientDataException;
 import com.solvd.fitness.person.Person;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 public abstract class PlanProvider<TItem, TPlan> {
@@ -14,7 +15,7 @@ public abstract class PlanProvider<TItem, TPlan> {
         this.planItems = planItems;
     }
 
-    public abstract TPlan createPlan(Person client) throws ClientDataException;
+    public abstract TPlan createPlan(Person client, Predicate<TItem> filter) throws ClientDataException;
 
     public Stream<TItem> getPlanItems() {
         return planItems.stream();

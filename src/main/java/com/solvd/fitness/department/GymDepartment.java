@@ -39,6 +39,6 @@ public class GymDepartment extends ProfileDepartment<Workout> {
 
     @Override
     public IPlan getPlan(Person client, FitnessGoal goal) throws Exception {
-        return getProfile(goal).createPlan(client);
+        return getProfile(goal).createPlan(client, exercise -> exercise.isActive());
     }
 }

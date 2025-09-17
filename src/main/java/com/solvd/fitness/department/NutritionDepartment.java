@@ -17,7 +17,7 @@ public class NutritionDepartment extends ProfileDepartment<Nutrition> {
                 List.of(
                         new FiberMeal("Broccoli", 100),
                         new FiberMeal("Carrot", 100),
-                        new ProteinMeal("Cucumber", 200)
+                        new ProteinMeal("Veal", 200)
                 )
         ));
 
@@ -39,6 +39,6 @@ public class NutritionDepartment extends ProfileDepartment<Nutrition> {
 
     @Override
     public IPlan getPlan(Person client, FitnessGoal goal) throws Exception {
-        return getProfile(goal).createPlan(client);
+        return getProfile(goal).createPlan(client, meal -> !meal.isVegan());
     }
 }

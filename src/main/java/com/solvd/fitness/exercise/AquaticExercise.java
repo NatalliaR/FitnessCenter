@@ -3,7 +3,7 @@ package com.solvd.fitness.exercise;
 public class AquaticExercise extends Exercise {
 
     public AquaticExercise(String name, int idealTime) {
-        super(name, idealTime);
+        super(name, idealTime, true);
     }
 
     @Override
