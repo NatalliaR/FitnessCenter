@@ -5,7 +5,6 @@ import com.solvd.fitness.exercise.Exercise;
 import com.solvd.fitness.person.Person;
 import com.solvd.fitness.plan.WorkoutPlan;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Workout extends PlanProvider<Exercise, WorkoutPlan> {
@@ -27,10 +26,9 @@ public class Workout extends PlanProvider<Exercise, WorkoutPlan> {
     }
 
     private WorkoutPlan buildPlan(float coefficient) {
-        List<String> instructions = new ArrayList<>();
-        for (Exercise exercise : getPlanItems()) {
-            instructions.add(exercise.toString() + ": " + (int) (coefficient * exercise.getIdealTime()) + "min");
-        }
+        List<String> instructions = getPlanItems().map(exercise -> {
+            return exercise.toString() + ": " + (int) (coefficient * exercise.getIdealTime()) + "min";
+        }).toList();
         return new WorkoutPlan(instructions);
     }
 }

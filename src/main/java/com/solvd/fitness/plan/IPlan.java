@@ -1,14 +1,15 @@
 package com.solvd.fitness.plan;
 
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface IPlan {
 
     String getName();
 
-    List<String> getInstructions();
+    Stream<String> getInstructions();
 
     default String getDescription() {
-        return getName() + ": " + getInstructions();
+        return getName() + ": " + getInstructions().collect(Collectors.joining(", "));
     }
 }

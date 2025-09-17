@@ -5,7 +5,6 @@ import com.solvd.fitness.meal.Meal;
 import com.solvd.fitness.person.Person;
 import com.solvd.fitness.plan.NutritionPlan;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Nutrition extends PlanProvider<Meal, NutritionPlan> {
@@ -24,10 +23,10 @@ public class Nutrition extends PlanProvider<Meal, NutritionPlan> {
     }
 
     private NutritionPlan createPlan(float coefficient) {
-        List<String> instructions = new ArrayList<>();
-        for (Meal meal : getPlanItems()) {
-            instructions.add(meal.toString() + ": " + (int) (coefficient * meal.getIdealWeightGrams()) + "g");
-        }
+        List<String> instructions = getPlanItems().map(meal -> {
+            return meal.toString() + ": " + (int) (coefficient * meal.getIdealWeightGrams()) + "g";
+        }).toList();
+
         return new NutritionPlan(instructions);
     }
 }

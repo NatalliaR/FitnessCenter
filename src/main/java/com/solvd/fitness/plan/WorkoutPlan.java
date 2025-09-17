@@ -1,6 +1,7 @@
 package com.solvd.fitness.plan;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class WorkoutPlan implements IPlan {
 
@@ -10,8 +11,8 @@ public class WorkoutPlan implements IPlan {
         this.instructions = instructions;
     }
 
-    public List<String> getInstructions() {
-        return instructions;
+    public Stream<String> getInstructions() {
+        return instructions.stream();
     }
 
     @Override
