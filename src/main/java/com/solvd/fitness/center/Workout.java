@@ -15,7 +15,7 @@ public class Workout extends PlanProvider<Exercise, WorkoutPlan> {
     }
 
     @Override
-    public WorkoutPlan createPlan(Person client, Predicate<Exercise> filter) throws ClientDataException {
+    public WorkoutPlan createPlan(Person client, PlanItemFilter<Exercise> filter) throws ClientDataException {
         if (client.getWeightCoefficient() <= 0) {
             throw new ClientDataException("Client weight coefficient has to be positive");
         }
@@ -26,8 +26,8 @@ public class Workout extends PlanProvider<Exercise, WorkoutPlan> {
         };
     }
 
-    private WorkoutPlan buildPlan(float coefficient, Predicate<Exercise> filter) {
-        List<String> instructions = getPlanItems().filter(filter).map(exercise -> {
+    private WorkoutPlan buildPlan(float coefficient, PlanItemFilter<Exercise> filter) {
+        List<String> instructions = getPlanItems().filter(item -> filter.shouldInclude(item)).map(exercise -> {
             return exercise.toString() + ": " + (int) (coefficient * exercise.getIdealTime()) + "min";
         }).toList();
         return new WorkoutPlan(instructions);

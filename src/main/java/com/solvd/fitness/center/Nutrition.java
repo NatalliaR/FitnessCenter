@@ -15,7 +15,7 @@ public class Nutrition extends PlanProvider<Meal, NutritionPlan> {
     }
 
     @Override
-    public NutritionPlan createPlan(Person client, Predicate<Meal> filter) throws ClientDataException {
+    public NutritionPlan createPlan(Person client, PlanItemFilter<Meal> filter) throws ClientDataException {
         return switch (client.getActivityLevel()) {
             case NOT_ACTIVE -> createPlan(2 * client.getWeightCoefficient(), filter);
             case SOMEHOW_ACTIVE -> createPlan(client.getWeightCoefficient(), filter);
@@ -23,8 +23,8 @@ public class Nutrition extends PlanProvider<Meal, NutritionPlan> {
         };
     }
 
-    private NutritionPlan createPlan(float coefficient, Predicate<Meal> filter) {
-        List<String> instructions = getPlanItems().filter(filter).map(meal -> {
+    private NutritionPlan createPlan(float coefficient, PlanItemFilter<Meal> filter) {
+        List<String> instructions = getPlanItems().filter(item -> filter.shouldInclude(item)).map(meal -> {
             return meal.toString() + ": " + (int) (coefficient * meal.getIdealWeightGrams()) + "g";
         }).toList();
 

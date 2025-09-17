@@ -9,6 +9,8 @@ import com.solvd.fitness.plan.IPlan;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.stream.Collectors;
+
 public class Main {
 
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
@@ -29,8 +31,12 @@ public class Main {
 
             LOGGER.info("Departments: " + fitnessCenter.getDepartmentNames());
 
-            LOGGER.info(workoutPlan.getDescription());
-            LOGGER.info(nutritionPlan.getDescription());
+            LOGGER.info(workoutPlan.getDescription(instructions -> {
+                return instructions.collect(Collectors.joining(", "));
+            }));
+            LOGGER.info(nutritionPlan.getDescription(instructions -> {
+                return instructions.collect(Collectors.joining("; "));
+            }));
 
         } catch (Exception e) {
             LOGGER.error("Exception while retrieving plans", e);

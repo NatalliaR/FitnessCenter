@@ -17,7 +17,8 @@ public class NutritionDepartment extends ProfileDepartment<Nutrition> {
                 List.of(
                         new FiberMeal("Broccoli", 100),
                         new FiberMeal("Carrot", 100),
-                        new ProteinMeal("Veal", 200)
+                        new ProteinMeal("Veal", 200),
+                        new ProteinMeal("Chicken Breast", 50)
                 )
         ));
 

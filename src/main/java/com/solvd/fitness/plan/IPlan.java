@@ -1,6 +1,5 @@
 package com.solvd.fitness.plan;
 
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public interface IPlan {
@@ -9,7 +8,7 @@ public interface IPlan {
 
     Stream<String> getInstructions();
 
-    default String getDescription() {
-        return getName() + ": " + getInstructions().collect(Collectors.joining(", "));
+    default String getDescription(PlanDescriptionBuilder descriptionBuilder) {
+        return getName() + ": " + descriptionBuilder.getDescription(getInstructions());
     }
 }

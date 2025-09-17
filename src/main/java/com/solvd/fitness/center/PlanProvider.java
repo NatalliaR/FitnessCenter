@@ -15,7 +15,7 @@ public abstract class PlanProvider<TItem, TPlan> {
         this.planItems = planItems;
     }
 
-    public abstract TPlan createPlan(Person client, Predicate<TItem> filter) throws ClientDataException;
+    public abstract TPlan createPlan(Person client, PlanItemFilter<TItem> filter) throws ClientDataException;
 
     public Stream<TItem> getPlanItems() {
         return planItems.stream();
