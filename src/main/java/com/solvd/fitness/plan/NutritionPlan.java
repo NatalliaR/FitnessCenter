@@ -3,14 +3,9 @@ package com.solvd.fitness.plan;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class NutritionPlan implements IPlan {
+public record NutritionPlan(List<String> instructions) implements IPlan {
 
-    private final List<String> instructions;
-
-    public NutritionPlan(List<String> instructions) {
-        this.instructions = instructions;
-    }
-
+    @Override
     public Stream<String> getInstructions() {
         return instructions.stream();
     }
