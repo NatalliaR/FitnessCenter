@@ -6,16 +6,10 @@ public abstract class Meal implements IHasName {
 
     private final String name;
     private final int idealWeightGrams;
-    private final boolean vegan;
 
-    public Meal(String name, int idealWeightGrams, boolean vegan) {
+    public Meal(String name, int idealWeightGrams) {
         this.name = name;
-        this.vegan = vegan;
         this.idealWeightGrams = idealWeightGrams;
-    }
-
-    public boolean isVegan() {
-        return vegan;
     }
 
     public String getName() {

@@ -4,6 +4,8 @@ import com.solvd.fitness.center.Workout;
 import com.solvd.fitness.enums.FitnessGoal;
 import com.solvd.fitness.exercise.AquaticExercise;
 import com.solvd.fitness.exercise.AthleticExercise;
+import com.solvd.fitness.exercise.Exercise;
+import com.solvd.fitness.exercise.ExerciseType;
 import com.solvd.fitness.exercise.WeightLiftingExercise;
 import com.solvd.fitness.person.Person;
 import com.solvd.fitness.plan.IPlan;
@@ -39,6 +41,11 @@ public class GymDepartment extends ProfileDepartment<Workout> {
 
     @Override
     public IPlan getPlan(Person client, FitnessGoal goal) throws Exception {
-        return getProfile(goal).createPlan(client, exercise -> exercise.isActive());
+        return getProfile(goal).createPlan(client, exercise -> isActive(exercise));
+    }
+
+    private boolean isActive(Exercise exercise) {
+        ExerciseType exerciseType = exercise.getClass().getDeclaredAnnotation(ExerciseType.class);
+        return exerciseType == null ? true : exerciseType.isActive();
     }
 }

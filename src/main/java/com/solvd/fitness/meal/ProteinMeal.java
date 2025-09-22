@@ -1,9 +1,10 @@
 package com.solvd.fitness.meal;
 
+@MealType(isVegan = false)
 public class ProteinMeal extends Meal {
 
     public ProteinMeal(String name, int idealWeightGrams) {
-        super(name, idealWeightGrams, false);
+        super(name, idealWeightGrams);
     }
 
     @Override

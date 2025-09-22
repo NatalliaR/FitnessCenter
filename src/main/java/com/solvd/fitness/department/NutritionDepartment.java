@@ -4,6 +4,8 @@ import com.solvd.fitness.center.Nutrition;
 import com.solvd.fitness.enums.FitnessGoal;
 import com.solvd.fitness.meal.CerealsMeal;
 import com.solvd.fitness.meal.FiberMeal;
+import com.solvd.fitness.meal.Meal;
+import com.solvd.fitness.meal.MealType;
 import com.solvd.fitness.meal.ProteinMeal;
 import com.solvd.fitness.person.Person;
 import com.solvd.fitness.plan.IPlan;
@@ -40,6 +42,11 @@ public class NutritionDepartment extends ProfileDepartment<Nutrition> {
 
     @Override
     public IPlan getPlan(Person client, FitnessGoal goal) throws Exception {
-        return getProfile(goal).createPlan(client, meal -> !meal.isVegan());
+        return getProfile(goal).createPlan(client, meal -> !isVegan(meal));
+    }
+
+    private boolean isVegan(Meal meal) {
+        MealType mealType = meal.getClass().getDeclaredAnnotation(MealType.class);
+        return mealType == null ? false : mealType.isVegan();
     }
 }

@@ -6,16 +6,10 @@ public abstract class Exercise implements IHasName {
 
     private final String name;
     private final int idealTime;
-    private final boolean active;
 
-    public Exercise(String name, int idealTime, boolean active) {
+    public Exercise(String name, int idealTime) {
         this.name = name;
-        this.active = active;
         this.idealTime = idealTime;
-    }
-
-    public boolean isActive() {
-        return active;
     }
 
     public String getName() {
